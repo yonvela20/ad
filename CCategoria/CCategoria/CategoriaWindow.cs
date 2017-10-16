@@ -21,6 +21,7 @@ namespace CCategoria
                 dbDataParameter.Value = nombre;
                 dbCommand.Parameters.Add(dbDataParameter);
                 dbCommand.ExecuteNonQuery();
+
                 Destroy();
             };
         }

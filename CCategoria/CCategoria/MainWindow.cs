@@ -21,20 +21,19 @@ public partial class MainWindow : Gtk.Window
         ListStore listStore = new ListStore(typeof(ulong), typeof(string));
 
         //rellena las columnas leyendo la base de datos
-        IDbCommand dbCommand = App.Instance.Connection.CreateCommand();
-		dbCommand.CommandText = "select * from categoria";
-		
-        IDataReader dataReader = dbCommand.ExecuteReader();
-        while (dataReader.Read())
-			listStore.AppendValues(dataReader["id"], dataReader["nombre"]);
-		dataReader.Close();
-
+        fillListStore(listStore);
+        //Nueva accion
         newAction.Activated += delegate {
             new CategoriaWindow();
         };
 
-        treeView.Model = listStore;
+        //Refrescar 
+        refreshAction.Activated += delegate {
+            listStore.Clear();
+            fillListStore(listStore);
+		};
 
+        treeView.Model = listStore;
     }
 
     protected void OnDeleteEvent(object sender, DeleteEventArgs a)
@@ -43,5 +42,14 @@ public partial class MainWindow : Gtk.Window
 
         Application.Quit();
         a.RetVal = true;
+    }
+
+    private void fillListStore(ListStore listStore){
+		IDbCommand dbCommand = App.Instance.Connection.CreateCommand();
+		dbCommand.CommandText = "select * from categoria";
+		IDataReader dataReader = dbCommand.ExecuteReader();
+		while (dataReader.Read())
+		listStore.AppendValues(dataReader["id"], dataReader["nombre"]);
+        dataReader.Close();
     }
 }
