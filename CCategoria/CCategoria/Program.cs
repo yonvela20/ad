@@ -1,6 +1,9 @@
 ﻿using System;
 using Gtk;
 
+using Serpis.Ad;
+
+
 namespace CCategoria
 {
     class MainClass
