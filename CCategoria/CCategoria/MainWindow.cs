@@ -49,11 +49,8 @@ public partial class MainWindow : Gtk.Window
 		deleteAction.Activated += delegate {
 			if (WindowsHelper.Confirm(this, "¿Quieres eliminar el registro?"))
 			{
-				object id = getId();
-				IDbCommand dbCommand = App.Instance.Connection.CreateCommand();
-				dbCommand.CommandText = "delete from categoria where id = @id";
-				DbCommandHelper.AddParameter(dbCommand, "id", id);
-				dbCommand.ExecuteNonQuery();
+                object id = getId(); 
+                CategoriaDao.Delete(id);
 			}
 
 
