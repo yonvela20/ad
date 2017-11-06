@@ -1,0 +1,61 @@
+﻿ousing Gtk;
+using System;
+using System.Data;
+
+namespace Serpis.Ad
+{
+    public class TreeViewHelper
+    {
+        private static void init(TreeView treeView, IDataReader dataReader){
+            if(treeView.Model != null){
+                return;
+            }
+			int fieldCount = dataReader.FieldCount;
+			ListStore listStore = (ListStore)treeView.Model;
+			if (listStore == null)
+			{
+				Type[] types = new Type[fieldCount];
+
+				for (int index = 0; index < fieldCount; index++)
+				{
+					treeView.AppendColumn(dataReader.GetName(index),
+						  new CellRendererText(), "text", index);
+					types[index] = typeof(string);
+				}
+				listStore = new ListStore(types);
+				treeView.Model = listStore;
+			}
+        }
+
+        private static void fillListStore(ListStore listStore, IDataReader dataReader){
+            listStore.Clear();
+            int fieldCount = dataReader.FieldCount;
+            while (dataReader.Read())
+			{
+				string[] values = new string[fieldCount];
+				for (int index = 0; index < fieldCount; index++)
+				{
+					values[index] = dataReader[index].ToString();
+					listStore.AppendValues(values);
+				}
+			}
+
+        }
+
+        public static void Fill(TreeView treeView, string selectSql)
+        {
+
+            IDbCommand dbCommnand = App.Instance.Connection.CreateCommand();
+            dbCommnand.CommandText = selectSql;
+            IDataReader dataReader = dbCommnand.ExecuteReader();
+
+            init(treeView, dataReader);
+            ListStore listStore = (ListStore)treeView.Model;
+
+            fillListStore(listStore, dataReader);
+            dataReader.Close();
+        }
+    }
+}
+
+
