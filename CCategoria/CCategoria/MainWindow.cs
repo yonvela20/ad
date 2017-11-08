@@ -5,7 +5,6 @@ using System.Data;
 using Serpis.Ad;
 
 using CCategoria;
-
 public partial class MainWindow : Gtk.Window
 {
 	public MainWindow() : base(Gtk.WindowType.Toplevel)
@@ -35,9 +34,9 @@ public partial class MainWindow : Gtk.Window
 
 
         editAction.Activated += delegate{
-            object id = getId();
-            new CategoriaWindow(id);
-
+            object id = TreeViewHelper.getId(treeView);
+            Categoria categoria = CategoriaDao.Load(id);
+            new CategoriaWindow(categoria);
         };
 
 		refreshAction.Activated += delegate {
@@ -48,19 +47,12 @@ public partial class MainWindow : Gtk.Window
 		deleteAction.Activated += delegate {
 			if (WindowsHelper.Confirm(this, "¿Quieres eliminar el registro?"))
 			{
-                object id = getId(); 
+                object id = TreeViewHelper.getId(treeView); 
                 CategoriaDao.Delete(id);
 			}
 
 
 		};
-	}
-
-	private object getId()
-	{
-		TreeIter treeIter;
-		treeView.Selection.GetSelected(out treeIter);
-		return treeView.Model.GetValue(treeIter, 0);
 	}
 
 	private void fillListStore(ListStore listStore)
