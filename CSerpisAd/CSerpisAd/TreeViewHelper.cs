@@ -34,10 +34,9 @@ namespace Serpis.Ad
 			{
 				string[] values = new string[fieldCount];
 				for (int index = 0; index < fieldCount; index++)
-				{
 					values[index] = dataReader[index].ToString();
-					listStore.AppendValues(values);
-				}
+				listStore.AppendValues(values);
+				
 			}
 
         }
