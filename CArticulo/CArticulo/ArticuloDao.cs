@@ -16,10 +16,13 @@ namespace CArticulo
 			IDataReader dataReader = dbCommand.ExecuteReader();
 			dataReader.Read();//TODO tratamiento de excepciones
 			string nombre = (string)dataReader["nombre"];
+			decimal precio = (decimal)dataReader["precio"];
 			dataReader.Close();
 			Articulo articulo = new Articulo();
 			articulo.Id = Convert.ToInt64(id);
 			articulo.Nombre = nombre;
+            articulo.Precio = precio;
+            articulo.Precio = Convert.ToDecimal(precio);
 			return articulo;
 		}
 
@@ -34,17 +37,19 @@ namespace CArticulo
 		private static void Insert(Articulo articulo)
 		{
 			IDbCommand dbCommand = App.Instance.Connection.CreateCommand();
-			dbCommand.CommandText = "insert into articulo (nombre) values (@nombre)";
+			dbCommand.CommandText = "insert into articulo (nombre, precio) values (@nombre, @precio)";
 			DbCommandHelper.AddParameter(dbCommand, "nombre", articulo.Nombre);
+            DbCommandHelper.AddParameter(dbCommand, "precio", articulo.Precio);
 			dbCommand.ExecuteNonQuery();
 		}
 
 		private static void Update(Articulo articulo)
 		{
 			IDbCommand dbCommand = App.Instance.Connection.CreateCommand();
-			dbCommand.CommandText = "update categoria set nombre=@nombre where id = @id";
-			DbCommandHelper.AddParameter(dbCommand, "id", articulo.Id);
+			dbCommand.CommandText = "update articulo set nombre = @nombre, precio = @precio where id = @id ";
 			DbCommandHelper.AddParameter(dbCommand, "nombre", articulo.Nombre);
+			DbCommandHelper.AddParameter(dbCommand, "id", articulo.Id);
+			DbCommandHelper.AddParameter(dbCommand, "precio", articulo.Precio);
 			dbCommand.ExecuteNonQuery();
 		}
 
