@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-
 using Serpis.Ad;
 
 namespace CArticulo
@@ -12,15 +11,16 @@ namespace CArticulo
 			this.Build();
             entryNombre.Text = articulo.Nombre; 
             spinButtonPrecio.Value = (double)articulo.Precio;
-            //entryCategoria.Text = articulo.Categoria.ToString();
+            entryCategoria.Text = articulo.Categoria.ToString();
 
 			saveAction.Activated += delegate {
 				articulo.Nombre = entryNombre.Text;
                 articulo.Precio = (decimal)spinButtonPrecio.Value;
-                //articulo.Categoria = entryCategoria.Text;
+                articulo.Categoria = long.Parse(entryCategoria.Text);
 				ArticuloDao.Save(articulo);
 				Destroy();
 			};
 		}
 	}
 }
+
