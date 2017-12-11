@@ -11,7 +11,7 @@ public partial class MainWindow : Gtk.Window
         App.Instance.Connection = new MySqlConnection("server = localhost; database = dbprueba; user = root; password = sistemas");
         App.Instance.Connection.Open();
 
-        ComboBoxHelper.Fill(comboBox, "SELECT id, nombre from categoria order by nombre", 0);
+        ComboBoxHelper.Fill(comboBox, "SELECT id, nombre from categoria order by nombre", 2);
     }
 
     protected void OnDeleteEvent(object sender, DeleteEventArgs a)

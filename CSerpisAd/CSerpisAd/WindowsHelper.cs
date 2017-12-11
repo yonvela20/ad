@@ -15,6 +15,7 @@ namespace Serpis.Ad
 
             messageDialog.Title = parent.Title;
 
+
             ResponseType response = (ResponseType)messageDialog.Run();
             messageDialog.Destroy();
 

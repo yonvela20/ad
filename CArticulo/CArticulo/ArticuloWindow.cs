@@ -11,12 +11,12 @@ namespace CArticulo
 			this.Build();
             entryNombre.Text = articulo.Nombre; 
             spinButtonPrecio.Value = (double)articulo.Precio;
-            entryCategoria.Text = articulo.Categoria.ToString();
+            ComboBoxHelper.Fill(comboBoxCategoria, "select id, nombre from categoria order by nombre", articulo.Categoria);
 
 			saveAction.Activated += delegate {
 				articulo.Nombre = entryNombre.Text;
                 articulo.Precio = (decimal)spinButtonPrecio.Value;
-                articulo.Categoria = long.Parse(entryCategoria.Text);
+                //articulo.Categoria = long.Parse(comboBoxCategoria.Text);
 				ArticuloDao.Save(articulo);
 				Destroy();
 			};
