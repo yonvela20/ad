@@ -24,6 +24,7 @@ public class Menu {
 	            	System.exit(0);
 	                     break;
 	            case 1: //Nuevo
+	            	ArticuloDao.Nuevo();
 	            	;
 	                     break;
 	            case 2: //Editar
