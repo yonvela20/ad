@@ -3,6 +3,7 @@ package serpis.ad;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -15,13 +16,11 @@ public class Menu {
 				+ "3 Eliminar \n"
 				+ "4 Consultar \n"
 				+ "5 Listar");
-		
 		Scanner scn = new Scanner(System.in);
 		int eleccion = scn.nextInt();
 	        switch (eleccion) {
 	            case 0: //Salir
-	            	System.out.println("Saliendo del programa...");
-	            	System.exit(0);
+	            	ArticuloDao.Salir();
 	                     break;
 	            case 1: //Nuevo
 	            	ArticuloDao.Nuevo();
@@ -44,6 +43,5 @@ public class Menu {
 	            	System.out.println("Error");
 	                     break;
 	        }
-	    }
-	
+	}
 }

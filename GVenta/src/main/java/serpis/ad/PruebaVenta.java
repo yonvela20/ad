@@ -25,20 +25,13 @@ public class PruebaVenta {
 		//remove(19L);
 		
 		//newCategoria();
-		
-		showAll();
 		showArticulo();
+		showCategoria();
+		showCliente();
+		showPedido();
+		//showPedidoLinea();
 		
 		entityManagerFactory.close();
-	}
-	
-	private static void showAll() {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		entityManager.getTransaction().begin();
-		List<Categoria> categorias = entityManager.createQuery("from Categoria order by id", Categoria.class).getResultList();
-		for (Categoria categoria : categorias)
-			System.out.println(categoria);
-		entityManager.getTransaction().commit();
 	}
 	
 	private static void showArticulo() {
@@ -50,6 +43,48 @@ public class PruebaVenta {
 		entityManager.getTransaction().commit();
 	}
 	
+	public static void showCategoria() {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		entityManager.getTransaction().begin();
+		List<Categoria> categorias = entityManager.createQuery("from Categoria order by id", Categoria.class).getResultList();
+		for (Categoria categoria : categorias)
+			System.out.println(categoria);
+		entityManager.getTransaction().commit();
+	}
+	
+	public static void showCliente() {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		entityManager.getTransaction().begin();
+		List<Cliente> clientes = entityManager.createQuery("from Cliente order by id", Cliente.class).getResultList();
+		for (Cliente cliente : clientes)
+			System.out.println(cliente);
+		entityManager.getTransaction().commit();
+	}
+	
+	public static void showPedido() {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		entityManager.getTransaction().begin();
+		List<Pedido> pedidos = entityManager.createQuery("from Pedido order by id", Pedido.class).getResultList();
+		for(Pedido pedido : pedidos) {
+			System.out.println(pedido);
+		entityManager.getTransaction().commit();
+		}
+	}
+	
+//	public static void showPedidoLinea() {
+//		EntityManager entityManager = entityManagerFactory.createEntityManager();
+//		entityManager.getTransaction().begin();
+//		List<PedidoLinea> pedidolineas = entityManager.createQuery("from PedidoLinea order by id", PedidoLinea.class).getResultList();
+//		for (PedidoLinea pedidolinea : pedidolineas)
+//			System.out.println(pedidolinea);
+//		entityManager.getTransaction().commit();
+//	}
+	
 	
 	
 }
+	
+
+
+
+

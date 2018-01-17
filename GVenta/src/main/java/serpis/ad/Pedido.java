@@ -3,6 +3,7 @@ package serpis.ad;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,9 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	private long cliente;
+	@ManyToOne
+	@JoinColumn (name="cliente")
+	private Cliente cliente;
 	private Date fecha;
 	private BigDecimal importe;
 	
@@ -21,11 +24,11 @@ public class Pedido {
 		this.id = id;
 	}
 	
-	public long getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 	
-	public void setCliente(long cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 	

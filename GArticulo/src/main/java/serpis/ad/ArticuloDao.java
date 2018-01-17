@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class ArticuloDao {
 	
+	//VOLVER AL MENU
 	public static void volverMenu() throws SQLException{
 		Scanner scn = new Scanner(System.in);
 		System.out.println("Quieres volver al menu? Y/N");
@@ -22,6 +23,7 @@ public class ArticuloDao {
 			System.exit(0);
 		}
 	}
+	
 	//ELIMINAR
 	public static void Eliminar() throws SQLException {
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/dbprueba","root","sistemas");
@@ -41,6 +43,7 @@ public class ArticuloDao {
       	connection.close();
       	volverMenu();
 	}
+	
 	//CONSULTAR
 	public static void Consultar() throws SQLException {
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/dbprueba","root","sistemas");
@@ -64,6 +67,7 @@ public class ArticuloDao {
       	connection.close();
       	volverMenu();
 	}
+	
 	//EDITAR
 	public static void Editar() throws SQLException {
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/dbprueba","root","sistemas");
@@ -124,6 +128,7 @@ public class ArticuloDao {
       	volverMenu();
 	}
 	
+	//NUEVO
 	public static void Nuevo() throws SQLException {
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/dbprueba","root","sistemas");
 		Statement stmt = connection.createStatement();
