@@ -98,7 +98,7 @@ public class PruebaVenta {
 		articulo.setCategoria(categoria);
 		entityManager.persist(articulo);
 		
-		entityManager.getTransaction().commit();		
+		entityManager.getTransaction().commit();	
 	}
 
 }
