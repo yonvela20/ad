@@ -24,7 +24,7 @@ namespace Serpis.Ad
         private static Categoria load(object id) {
 			
             IDbCommand dbCommand = App.Instance.Connection.CreateCommand();
-			dbCommand.CommandText = "select * from categoria where id = 1L";
+            dbCommand.CommandText = "select * from categoria where id = " + id;
 			DbCommandHelper.AddParameter(dbCommand, "id", id);
 			IDataReader dataReader = dbCommand.ExecuteReader();
 
