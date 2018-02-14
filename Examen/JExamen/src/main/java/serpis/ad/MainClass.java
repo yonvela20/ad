@@ -24,7 +24,7 @@ public class MainClass {
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/dbprueba","root","sistemas");
 		Statement stmt = connection.createStatement();
 		
-		String sql = "SELECT * FROM categoria WHERE id = 1L";
+		String sql = "SELECT * FROM categoria WHERE id = " + id;
 		ResultSet rs = stmt.executeQuery(sql);
 				
 		categoria.setId(rs.getLong("id"));
